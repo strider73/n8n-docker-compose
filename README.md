@@ -1,2 +1,6 @@
-# n8n-docker-compose
-n8n-docker-compose
+run this command for postgres first 
+
+CREATE USER n8n WITH PASSWORD  '5785Ch00' ;
+CREATE DATABASE n8n_db OWNER n8n;
+GRANT ALL PRIVILEGES ON DATABASE n8n_db TO n8n;
+ALTER ROLE n8n WITH LOGIN;
