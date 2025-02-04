@@ -34,13 +34,20 @@ services:
       - N8N_HOST=n8n.${HOST_NAME}
       - N8N_PROTOCOL=https
       - WEBHOOK_URL=https://n8n.${HOST_NAME}/
+      - N8N_DEFAULT_BINARY_DATA_MODE=filesystem
     ports:
       - "5678:5678"
     # depends_on:
     #   postgres:
     #     condition: service_healthy
+
+    #official n8n Docker image runs as the node user
+    #/home/node is simply the non‐root home directory that belongs to the node user. 
+    #That’s why all the default n8n data files (e.g. ~/.n8n) are stored under /home/node/.n8n
     volumes:
       - n8n_storage:/home/node/.n8n
+      # Mount your Mac share folder at /home/node/fcpx inside the container
+      - /mnt/usb:/home/node/usb
 
 volumes:
   n8n_storage:
